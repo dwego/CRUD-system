@@ -1,12 +1,10 @@
 package com.dweg0.crud.crudsystem.core.domain.state;
 
 import com.dweg0.crud.crudsystem.core.domain.Order;
-import com.dweg0.crud.crudsystem.core.domain.SendReport;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class Shipped implements OrderStatus{
-    private final SendReport sendReport;
 
     public void cancel(Order order) {
         throw new IllegalStateException("Can't cancel a shipped order.");
@@ -17,8 +15,7 @@ public class Shipped implements OrderStatus{
     }
 
     public void deliver(Order order) {
-        order.setStatus(new Delivered(sendReport));
-        sendReport.send(order);
+        order.setStatus(new Delivered(order));
     }
 
     public String getName() {
