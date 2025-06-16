@@ -15,7 +15,7 @@ public class Email {
     }
 
     public static boolean isValidEmail(String email) {
-        return email.isBlank() && email.matches(emailRegex);
+        return email != null && email.matches(emailRegex);
     }
 
 }
