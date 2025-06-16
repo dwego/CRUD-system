@@ -1,14 +1,12 @@
 package com.dweg0.crud.crudsystem.core.domain;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
-@AllArgsConstructor
+@Builder
 public class User {
     private String name;
+    private Email email;
     private String password;
-    private String email;
 }
