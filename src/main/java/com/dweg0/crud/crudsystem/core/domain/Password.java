@@ -10,7 +10,7 @@ public class Password {
         if (plainText == null || plainText.length() < 8) {
             throw new IllegalArgumentException("Password must be at least 8 characters long.");
         }
-        this.hashed = hasher.hash(plainText);
+        this.hashed = plainText;
     }
 
     public boolean matches(String plainText, PasswordHasher hasher) {

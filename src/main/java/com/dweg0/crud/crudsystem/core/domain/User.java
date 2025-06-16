@@ -13,6 +13,8 @@ public class User {
     private String name;
     private Email email;
     private Password password;
+
+    @Builder.Default
     private List<Order> orders = new ArrayList<>();
 
     public void addOrder(Order order) {
@@ -34,10 +36,9 @@ public class User {
     }
 
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", email='" + email.getEmail() + '\'' +
-                ", orders=" + getOrders() +
-                '}';
+        return "User: " +
+                "name: '" + name + '\'' +
+                "email: '" + email.getEmail() + '\'' +
+                "\norders: " + orders.toString() + "\n";
     }
 }

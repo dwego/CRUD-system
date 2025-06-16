@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 public class Pending implements OrderStatus{
 
     public void cancel(Order order) {
-        order.setStatus(new Cancelled(order));
+        order.setStatus(new Cancelled());
     }
 
     public void ship(Order order) {

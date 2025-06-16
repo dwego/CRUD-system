@@ -57,4 +57,12 @@ public class Order {
                 .map(OrderItem::getTotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
+    public String toString() {
+        return "Order:" +
+                "id: '" + id + '\'' +
+                "user: " + user.getName() +
+                "\nitems: " + items.toString() + "\n" +
+                "status: " + status.getName();
+    }
 }

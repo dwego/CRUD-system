@@ -33,4 +33,11 @@ public class OrderItem {
     public BigDecimal getTotal() {
         return product.getPrice().multiply(BigDecimal.valueOf(quantity));
     }
+
+    public String toString() {
+        return
+                "id: '" + id + '\'' +
+                ",\nProducts: " + product.toString() + "\n" +
+                ", quantity: " + quantity;
+    }
 }

@@ -15,7 +15,7 @@ public class Shipped implements OrderStatus{
     }
 
     public void deliver(Order order) {
-        order.setStatus(new Delivered(order));
+        order.setStatus(new Delivered());
     }
 
     public String getName() {
