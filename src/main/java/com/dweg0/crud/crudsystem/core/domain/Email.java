@@ -5,13 +5,9 @@ import lombok.Getter;
 @Getter
 public class Email {
     private static final String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-    private String email;
+    private final String email;
 
     public Email(String email) {
-        setEmail(email);
-    }
-
-    public void setEmail(String email) {
         if (!isValidEmail(email)) {
             throw new IllegalArgumentException("Invalid email address");
         }
@@ -19,7 +15,7 @@ public class Email {
     }
 
     public static boolean isValidEmail(String email) {
-        return email != null && email.matches(emailRegex);
+        return email.isBlank() && email.matches(emailRegex);
     }
 
 }
