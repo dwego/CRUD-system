@@ -2,7 +2,6 @@ package com.dweg0.crud.crudsystem;
 
 import com.dweg0.crud.crudsystem.core.domain.Email;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

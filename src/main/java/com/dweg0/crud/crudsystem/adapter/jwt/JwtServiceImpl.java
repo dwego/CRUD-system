@@ -3,15 +3,15 @@ package com.dweg0.crud.crudsystem.adapter.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
-import com.dweg0.crud.crudsystem.adapter.outbound.persistence.entity.UserEntity;
-import com.dweg0.crud.crudsystem.core.domain.model.User;
+import com.dweg0.crud.crudsystem.core.domain.User;
+import com.dweg0.crud.crudsystem.core.usecase.JwtService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 @NoArgsConstructor
-public class JwtService {
+public class JwtServiceImpl implements JwtService {
 
     @Value("${jwt.secret}")
     private String secret;

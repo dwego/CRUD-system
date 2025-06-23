@@ -1,10 +1,10 @@
 package com.dweg0.crud.crudsystem.adapter.inbound.web;
 
-import com.dweg0.crud.crudsystem.core.domain.model.User;
+import com.dweg0.crud.crudsystem.core.domain.User;
 
 import java.util.UUID;
 
-public record UserResponse(
+public record RegisterResponse(
         UUID id,
         String username,
         String name,
@@ -12,8 +12,8 @@ public record UserResponse(
         String avatarUrl,
         String bio
 ) {
-    public static UserResponse fromDomain(User user) {
-        return new UserResponse(
+    public static RegisterResponse fromDomain(User user) {
+        return new RegisterResponse(
                 user.getId(),
                 user.getUsername(),
                 user.getName(),
