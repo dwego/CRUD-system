@@ -1,4 +1,4 @@
-package com.dweg0.crud.crudsystem.adapter.inbound.web;
+package com.dweg0.crud.crudsystem.adapter.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

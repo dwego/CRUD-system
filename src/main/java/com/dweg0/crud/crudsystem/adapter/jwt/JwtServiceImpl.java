@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.temporal.ChronoUnit;
 
 @Service
 @NoArgsConstructor
@@ -28,13 +26,13 @@ public class JwtServiceImpl implements JwtService {
     @Value("${auth.jwt.refresh-token.expiration}")
     private Integer refreshTokenExpirationHours;
 
-    public String createJwtToken(User user) {
+    public String createJwtToken(User user, Integer expirationHours) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("auth0")
                     .withSubject(String.valueOf(user.getId()))
-                    .withExpiresAt(generateExpirationDate())
+                    .withExpiresAt(generateExpirationDate(expirationHours))
                     .sign(algorithm);
         } catch (JWTCreationException e) {
             throw new RuntimeException("Erro ao criar o token JWT", e);
@@ -55,9 +53,17 @@ public class JwtServiceImpl implements JwtService {
     }
 
     // Estamos no GMT -3:00
-    private Instant generateExpirationDate() {
+    private Instant generateExpirationDate(Integer expirationHours) {
         return LocalDateTime.now()
-                .plusHours(TokenExpirationHours)
+                .plusHours(expirationHours)
                 .toInstant(ZoneOffset.of("-03:00"));
+    }
+
+    public Integer getTokenExpirationHours() {
+        return TokenExpirationHours;
+    }
+
+    public Integer getRefreshTokenExpirationHours() {
+        return refreshTokenExpirationHours;
     }
 }
