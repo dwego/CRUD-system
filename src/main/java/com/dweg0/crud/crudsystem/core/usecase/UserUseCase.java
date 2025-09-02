@@ -1,5 +1,6 @@
 package com.dweg0.crud.crudsystem.core.usecase;
 
+import com.dweg0.crud.crudsystem.adapter.dto.TokenResponseDTO;
 import com.dweg0.crud.crudsystem.core.domain.*;
 import com.dweg0.crud.crudsystem.core.exception.UserNotFoundException;
 
@@ -10,12 +11,10 @@ public class UserUseCase {
 
     private final UserRepository userRepository;
     private final PasswordHasher passwordHasher;
-    private final JwtService jwtService;
 
-    public UserUseCase(UserRepository userRepository, PasswordHasher passwordHasher, JwtService jwtService) {
+    public UserUseCase(UserRepository userRepository, PasswordHasher passwordHasher) {
         this.userRepository = userRepository;
         this.passwordHasher = passwordHasher;
-        this.jwtService = jwtService;
     }
 
     public User createUser(RegisterModel registerModel) {
@@ -32,7 +31,6 @@ public class UserUseCase {
         return userWithHashedPassword;
     }
 
-
     public void deleteUser(User user) {
         userRepository.delete(user);
     }
@@ -45,19 +43,6 @@ public class UserUseCase {
                         .orElseThrow(() -> new UserNotFoundException(modifiedUser.getId()));
         currentUser.updateUser(modifiedUser);
         userRepository.save(currentUser);
-    }
-
-    public String authenticate(String email, String password) {
-        Optional<User> user = userRepository.findByEmail(email);
-        if (user.isEmpty()) {
-            return null;
-        }
-        User authenticatedUser = user.get();
-        if (!authenticatedUser.getPassword().matches(password, passwordHasher)) {
-            return null;
-        }
-
-        return jwtService.createJwtToken(authenticatedUser);
     }
 
     public Optional<User> getUser(String id) {
